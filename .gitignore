@@ -73,3 +73,6 @@ next-env.d.ts
 
 # Vercel
 .vercel
+
+# Turborepo
+.turbo

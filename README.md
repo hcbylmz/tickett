@@ -1,46 +1,98 @@
 # Tickett
 
-A full-stack application with separate frontend and backend projects, all tracked in a single git repository.
+A full-stack monorepo application using Turborepo to manage frontend and backend projects.
 
 ## Repository Structure
 
-This is a **single git repository** that contains both frontend and backend projects:
+This is a **Turborepo monorepo** that contains both frontend and backend projects:
 
 ```
 tickett/
-├── frontend/          # Next.js frontend application
-├── backend/           # NestJS backend application
-└── .gitignore         # Root-level gitignore for both projects
+├── apps/
+│   ├── frontend/      # Next.js frontend application
+│   └── backend/       # NestJS backend application
+├── packages/          # Shared packages (optional)
+├── package.json       # Root package.json with Turborepo
+├── turbo.json         # Turborepo configuration
+└── .gitignore         # Root-level gitignore
 ```
 
-## Projects
+## Tech Stack
 
-### Frontend
-- **Location**: `frontend/`
-- **Framework**: Next.js
-- **Setup**: See [frontend/README.md](./frontend/README.md)
+- **Monorepo Tool**: Turborepo
+- **Frontend**: Next.js 16
+- **Backend**: NestJS 11
+- **Package Manager**: npm workspaces
 
-### Backend
-- **Location**: `backend/`
-- **Framework**: NestJS
-- **Setup**: See [backend/README.md](./backend/README.md)
+## Getting Started
 
-## Development
+### Install Dependencies
 
-Each project has its own dependencies and can be run independently:
+From the root directory:
+
+```bash
+npm install
+```
+
+This will install all dependencies for both frontend and backend using npm workspaces.
+
+### Development
+
+Run all apps in development mode:
+
+```bash
+npm run dev
+```
+
+Or run specific apps:
+
+```bash
+# Frontend only
+npm run dev --filter=@tickett/frontend
+
+# Backend only
+npm run dev --filter=@tickett/backend
+```
+
+### Build
+
+Build all apps:
+
+```bash
+npm run build
+```
+
+### Other Commands
+
+```bash
+# Lint all apps
+npm run lint
+
+# Test all apps
+npm run test
+
+# Clean build artifacts
+npm run clean
+```
+
+## Individual App Development
+
+You can still work on individual apps directly:
 
 ```bash
 # Frontend
-cd frontend
-npm install
+cd apps/frontend
 npm run dev
 
 # Backend
-cd backend
-npm install
+cd apps/backend
 npm run start:dev
 ```
 
-## Git Repository
+## Benefits of Monorepo
 
-This is a **single git repository** tracking all changes in both frontend and backend directories. All commits are made from the root directory.
+- **Shared tooling**: Single configuration for linting, formatting, etc.
+- **Faster builds**: Turborepo caches and parallelizes builds
+- **Code sharing**: Easy to share code between frontend and backend
+- **Atomic commits**: Changes across apps in single commits
+- **Dependency management**: Single source of truth for dependencies
